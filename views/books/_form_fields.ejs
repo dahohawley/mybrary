@@ -1,0 +1,52 @@
+<div class="form-group row">
+    <label class="col-sm-3 col-form-label">Title</label>
+    <div class="col-sm-9">
+        <input value="<% books.title %>" type="text" class="form-control" id="title" name="title">
+    </div>
+</div>
+
+<div class="form-group row">
+    <label class="col-sm-3 col-form-label">Authors</label>
+    <div class="col-sm-9">
+        <select name="author" id="author" class="form-control">
+            <% authors.forEach(author => {
+                var selected = '';
+                if(books.author === author.id){
+                    selected = "selected";
+                } %>
+
+            <option <% selected %> value="<%= author.id %>"><%= author.name %></option>
+
+            <% }) %>
+        </select>
+    </div>
+</div>
+
+<div class="form-group row">
+    <label for="" class="col-sm-3 col-form-label">Publish Date</label>
+    <div class="col-sm-9">
+        <input type="date" name="publishDate" id="publishDate" class="form-control"
+            value="<% books.publishDate == null ? '' : books.publishDate.toISOString().split('T')[0] %>">
+    </div>
+</div>
+
+<div class="form-group row">
+    <label for="" class="col-sm-3 col-form-label">Page Count</label>
+    <div class="col-sm-9">
+        <input type="text" class="form-control" value="<% books.pageCount %>" name="pageCount">
+    </div>
+</div>
+
+<div class="form-group row">
+    <label for="" class="col-sm-3 col-form-label">Cover</label>
+    <div class="col-sm-9">
+        <input type="file" class="form-control" name="file">
+    </div>
+</div>
+
+<div class="form-group row">
+    <label for="" class="col-sm-3 col-form-label">Description</label>
+    <div class="col-sm-9">
+        <textarea class="form-control" name="description"><% books.description %></textarea>
+    </div>
+</div>

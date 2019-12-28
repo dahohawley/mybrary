@@ -7,14 +7,14 @@ const app = express();
 const expressLayouts = require("express-ejs-layouts");
 const _PORT = process.env.PORT || 3000;
 const mongoose = require("mongoose");
-const bodyParser = require('body-parser')
+const bodyParser = require("body-parser");
 
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }))
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: false }));
 
 /* Database */
 mongoose.connect(process.env.DATABASE_URL, {
 	useNewUrlParser: true,
-	useUnifiedTopology: true
+	useUnifiedTopology: true,
 });
 const db = mongoose.connection;
 db.on("error", error => {
@@ -28,6 +28,7 @@ db.once("open", () => {
 /* Include Router */
 const indexRouter = require("./routes/index");
 const authorRouter = require("./routes/authors");
+const booksRouter = require("./routes/books");
 
 /* Include Router */
 
@@ -40,6 +41,7 @@ app.use(express.static("public"));
 /* Register Router */
 app.use("/", indexRouter);
 app.use("/authors", authorRouter);
+app.use("/books", booksRouter);
 
 app.listen(process.env.PORT || 3000, () => {
 	console.log(`Listening on port ${_PORT}`);
